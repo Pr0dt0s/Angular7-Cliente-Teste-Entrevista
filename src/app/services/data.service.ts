@@ -27,7 +27,10 @@ export class DataService {
   check() {
     this.http.get(environment.serverUrl)
       .subscribe(result => this.conectionEstablisedSource.next(!!result),
-        err => this.conectionEstablisedSource.next(false), () => console.log('GET completed'));
+        err => {
+          this.conectionEstablisedSource.next(false)
+          console.error('There has been an error while reaching the server',err)
+        }, () => console.log('GET completed'));
   }
 
 }

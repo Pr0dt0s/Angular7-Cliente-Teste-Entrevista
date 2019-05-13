@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +15,7 @@ export class HomePageComponent implements OnInit {
   constructor(private ds:DataService) { }
 
   ngOnInit() {
-    this.serverConnected$ = this.ds.conectionestablished$;
+    this.serverConnected$ = this.ds.conectionestablished$.pipe(tap(r => console.log(r)));
   }
 
 }

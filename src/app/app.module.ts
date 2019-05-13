@@ -10,7 +10,7 @@ import * as $ from 'jquery';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { DadosComponent } from './pages/dados/dados.component';
+import { DataComponent } from './pages/data/data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,7 @@ import { DadosComponent } from './pages/dados/dados.component';
     FooterComponent,
     HomePageComponent,
     SidebarComponent,
-    DadosComponent
+    DataComponent
   ],
   imports: [
     BrowserModule,

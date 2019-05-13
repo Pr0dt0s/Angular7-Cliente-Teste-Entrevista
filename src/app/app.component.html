@@ -1,8 +1,19 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
+<section class="hero is-fullheight">
+    <div class="hero-head">
+        <app-header></app-header>
+    </div>
+    <div class="hero-body">
+        <div class="columns ">
+            <div id="sidebar-container" class="column is-narrow">
+                <app-sidebar></app-sidebar>
+            </div>
 
-<div class="box">
-    <router-outlet></router-outlet>
-</div>
-
-<app-footer></app-footer>
+            <div class="column">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+    <div class="hero-foot">
+        <app-footer></app-footer>
+    </div>
+</section>
