@@ -17,17 +17,8 @@
 
 <ng-template #connected>
   <div *ngIf="!(serverConnected$ | async) ; else connected">
-    <div class="notification is-warning">
-      <div class="message-header has-background-grey">Erro tentando conectar com a API.</div>
-      <div class="message-body has-text-dark">
-        <strong> Parece que algo está errado com a conexão com o servidor. </strong>
-      </div>
-      <div class="level level-right">
-        <button class="button is-success has-icons-right">
-          <span> ¡Tentar de novo! </span>
-          <span class="icon"><i class="fas fa-redo"></i></span>
-        </button>
-      </div>
+    <div class="notification is-success">
+      <div class="message-header has-background-grey">Conectado com sucesso!</div>
     </div>
   </div>
 </ng-template>
