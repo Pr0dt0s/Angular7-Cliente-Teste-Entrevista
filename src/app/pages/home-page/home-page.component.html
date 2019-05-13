@@ -1,0 +1,12 @@
+<div class=" container align-content-center is-fullheight-with-navbar" [style.margin]="16">
+  <div *ngIf="!serverConnected$ | async as nc; else connected">
+    <div class="box is-fullheight">
+      <h1 class="is-2">Tentando conectar com o api</h1>
+    </div>
+  </div>
+  <ng-template #connected>
+    <div class="box is-fullheight">
+      <h1 class="is-2">Conectado com o api</h1>
+    </div>
+  </ng-template>
+</div>
