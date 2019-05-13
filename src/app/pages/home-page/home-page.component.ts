@@ -10,12 +10,22 @@ import { tap } from 'rxjs/operators';
 })
 export class HomePageComponent implements OnInit {
 
-  serverConnected$: Observable<Boolean>;
+  serverConnected$: Observable<boolean>;
 
-  constructor(private ds:DataService) { }
+  data: any;
+
+  constructor(private ds: DataService) { }
 
   ngOnInit() {
-    this.serverConnected$ = this.ds.conectionestablished$.pipe(tap(r => console.log(r)));
+    this.serverConnected$ = this.ds.conectionestablished$.pipe(tap(result => {
+      if (result) {
+        this.data = this.ds.ApiDetails();
+      }
+    }));
+  }
+
+  retry() {
+    this.ds.check();
   }
 
 }

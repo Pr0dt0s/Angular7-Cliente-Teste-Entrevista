@@ -7,7 +7,7 @@ import { DataComponent } from './pages/data/data.component';
 const routes: Routes = [
   { path: 'dados', component: DataComponent },
   { path: 'home', component: HomePageComponent },
-  { path: '', redirectTo: HomePageComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
