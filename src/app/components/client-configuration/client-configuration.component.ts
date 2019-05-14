@@ -1,20 +1,20 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { ServerConfiguration } from 'src/app/classes/classes';
+import { ClientConfiguration } from 'src/app/classes/classes';
 import { ConfigurationService } from 'src/app/services/configuration.service';
 import { Subscription, pipe, of } from 'rxjs';
 import { tap, take, concatMap } from 'rxjs/operators';
 import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-server-configuration',
-  templateUrl: './server-configuration.component.html',
-  styleUrls: ['./server-configuration.component.sass']
+  selector: 'app-client-configuration',
+  templateUrl: './client-configuration.component.html',
+  styleUrls: ['./client-configuration.component.sass']
 })
-export class ServerConfigurationComponent implements OnInit, OnDestroy {
+export class ClientConfigurationComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('configForm') form: NgForm;
 
-  configModel: ServerConfiguration;
+  configModel: ClientConfiguration;
 
   configSubscription: Subscription;
 
@@ -23,17 +23,23 @@ export class ServerConfigurationComponent implements OnInit, OnDestroy {
   }
 
   saveConfig() {
-    // this.cs.updateConfig(this.configModel);
+    this.cs.updateClientConfig(this.configModel);
+    // console.log(this.form);
+    // this.form.form.setValue(this.configModel);
   }
 
   resetConfig() {
-    this.cs.resetConfig();
+    this.cs.resetClientConfig();
+  }
+
+  ngAfterViewInit() {
+
   }
 
   ngOnInit() {
-    this.configSubscription = this.cs.config$
+    this.configSubscription = this.cs.clientConfig$
       .subscribe(config => {
-        // this.configModel = { ...config };
+        this.configModel = { ...config };
       });
   }
 

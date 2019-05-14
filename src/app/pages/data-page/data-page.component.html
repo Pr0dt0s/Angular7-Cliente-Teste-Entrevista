@@ -1,45 +1,55 @@
-<!-- If not connected -->
-<div *ngIf="!(data && data.length && data.length>0); else connected">
-    <div class="notification is-warning">
-        <div class="message-header has-background-grey">Esperando os dados...</div>
-        <div class="level level-right">
-            <button (click)="reload()" class="button is-success has-icons-right">
-                <span> ¡Recagerrar! </span>
-                <span class="icon"><i class="fas fa-redo"></i></span>
-            </button>
+<div class="box has-background-info">
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    vista de dados
+                </h1>
+                <h2 class="subtitle">
+                    enviar um query
+                </h2>
+            </div>
         </div>
+    </section>
+    <div>
+        <form class="form" #queryForm="ngForm">
+            <div class="field">
+                <label class="label">Query</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Select * from ..." [(ngModel)]="query" name="query">
+                </div>
+            </div>
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <button id="querybtn" class="button is-success" (click)="sendQuery()">Executar query!</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
-<ng-template #connected>
-    <div class="notification is-success">
-        Dados carregados corretamente.
-        <div class="field">
-            <label class="label">Eixo x</label>
-            <p class="control">
-                <span class="select">
-                    <select id="field1">
-                        <option *ngFor="let item of fields" value="{{item}}">{{item}}</option>
-                    </select>
-                </span>
-            </p>
+<section class="section">
+    <div class="notification">
+        <div class="heading">
+            <h1 class="title">Table view</h1>
+            <div class="content">
+                <div id="tabulator"></div>
+            </div>
         </div>
-        <div class="field">
-            <label class="label">Eixo y</label>
-            <p class="control">
-                <span class="select">
-                    <select id="field2">
-                        <option *ngFor="let item of fields" value="{{item}}">{{item}}</option>
-                    </select>
-                </span>
-            </p>
-        </div>
-        <button type="submit" class="button is-warning is-inverted is-outlined" (click)="createChart()">Atualizar grafico</button>
     </div>
-
-    <div *ngIf="ready">
-        
-        <app-tabulator [tableData]="data" [columnNames]="fields"></app-tabulator>
-
+</section>
+<div *ngIf="data$ | async">
+    <div class="content">
+        <pre class="has-background-dark has-text-weight-bold has-text-white">
+            {{data$ | async | json}}
+        </pre>
     </div>
-</ng-template>
+</div>

@@ -7,13 +7,13 @@ export class ClientConfiguration {
 }
 export class ServerConfiguration {
     constructor(
-        private hostname: string,
-        private mysql_port: string,
-        private username: string,
-        private password: string,
-        private database_name: string,
-        private table_name: string,
-        private replace_null: string,
-        private omit_null: string) { }
+        public hostname: string,
+        public mysql_port: string,
+        public username: string,
+        public password: string,
+        public database_name: string,
+        public table_name: string,
+        public replace_null: boolean,
+        public omit_null: boolean) { }
 }
 

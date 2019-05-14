@@ -8,33 +8,33 @@ import { ClientConfiguration } from '../classes/classes';
 })
 export class ConfigurationService {
   
-  private config:ClientConfiguration;
-  private defaultConfig: ClientConfiguration;
+  private clientConfig:ClientConfiguration;
+  private defaultClientConfig: ClientConfiguration;
 
-  private configSubject: BehaviorSubject<ClientConfiguration>;
-  public config$: Observable<ClientConfiguration>;
+  private clientConfigSubject: BehaviorSubject<ClientConfiguration>;
+  public clientConfig$: Observable<ClientConfiguration>;
 
   constructor() {
-    this.defaultConfig = new ClientConfiguration(
+    this.defaultClientConfig = new ClientConfiguration(
       environment.serverUrl,
       '/headers',
       '/seed_sql',
       '/config',
       '/query');
-    this.config = this.defaultConfig;
+    this.clientConfig = { ...this.defaultClientConfig };
     
-    this.configSubject = new BehaviorSubject<ClientConfiguration>(this.config);
-    this.config$ = this.configSubject.asObservable();
+    this.clientConfigSubject = new BehaviorSubject<ClientConfiguration>(this.clientConfig);
+    this.clientConfig$ = this.clientConfigSubject.asObservable();
   }
   
-  updateConfig(newConfig: ClientConfiguration) {
-    this.config = { ...newConfig };
-    this.configSubject.next(newConfig);
-    console.log('New config.',this.config);
+  updateClientConfig(newConfig: ClientConfiguration) {
+    this.clientConfig = { ...newConfig };
+    this.clientConfigSubject.next(newConfig);
+    console.log('New config.',this.clientConfig);
   }
 
-  resetConfig() {
-    this.updateConfig(this.defaultConfig);
+  resetClientConfig() {
+    this.updateClientConfig(this.defaultClientConfig);
   }
   
 }
