@@ -13,11 +13,11 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.sass']
+  selector: 'app-data-page',
+  templateUrl: './data-page.component.html',
+  styleUrls: ['./data-page.component.sass']
 })
-export class DataComponent implements OnInit {
+export class DataPageComponent implements OnInit {
 
   data: any;
 
@@ -33,7 +33,7 @@ export class DataComponent implements OnInit {
     am4core.useTheme(am4themes_animated);
   }
 
-
+  public ready = false;
 
   reload() {
     console.log('Trying to load data...')
@@ -50,6 +50,7 @@ export class DataComponent implements OnInit {
           this.fields.push(key);
         }
       }
+      this.ready = true;
       console.log(this.fields);
       setTimeout(() => this.createChart(), 500);
     });

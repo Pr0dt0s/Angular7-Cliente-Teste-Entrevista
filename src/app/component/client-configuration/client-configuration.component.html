@@ -1,0 +1,77 @@
+<div class="box has-background-warning">
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Configuração do Cliente (Angular 7 SPA)
+        </h1>
+        <h2 class="subtitle">
+          Ajuste aqui os valores para conectar ao API.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <div>
+    <form class="form" #configForm="ngForm">
+      <div class="level">
+        <div class="level-item is-3">
+          <div class="field">
+            <label class="label">Server Url</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.serverUrl" name="serverUrl">
+            </div>
+          </div>
+        </div>
+        <div class="level-item is-3">
+          <div class="field">
+            <label class="label">Headers sub Url</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.headersUrl"
+                name="headersUrl">
+            </div>
+          </div>
+        </div>
+        <div class="level-item is-3">
+          <div class="field">
+            <label class="label">Configuration sub Url</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.configUrl" name="configUrl">
+            </div>
+          </div>
+        </div>
+        <div class="level-item is-3">
+          <div class="field">
+            <label class="label">Query sub Url</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.queryUrl" name="queryUrl">
+            </div>
+          </div>
+        </div>
+        <div class="level-item is-3">
+          <div class="field">
+            <label class="label">Re-Seed the server Url</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.reseedUrl" name="reseedUrl">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            {{config | json}}
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+            <button class="button is-danger" (click)="resetConfig()">Reset Configuração</button>
+          </div>
+          <div class="level-item">
+            <button class="button is-success" (click)="saveConfig()">Salvar Configuração</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

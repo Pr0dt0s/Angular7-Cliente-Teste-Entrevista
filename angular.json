@@ -46,9 +46,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "./node_modules/tabulator-tables/dist/css/tabulator.min.css"
             ],
-            "scripts": ["./node_modules/jquery/dist/jquery.min.js"],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/tabulator-tables/dist/js/tabulator.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
