@@ -16,7 +16,7 @@ export class DataPageComponent implements OnInit {
   headers = [];
 
   // query: string = 'SELECT uuid,estado FROM base WHERE valor > 100 LIMIT 5';
-  query: string = 'SELECT valor FROM base LIMIT 100';
+  query: string = 'SELECT uf, sum(valor) from base group by uf';
 
   connected = false;
   conSub: Subscription;
