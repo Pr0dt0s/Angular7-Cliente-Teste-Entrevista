@@ -2,17 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Observable, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import { ResourceLoader } from '@angular/compiler';
-import Tabulator from 'tabulator-tables';
-
 import * as $ from 'jquery';
-
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
-
-
+import * as Chart from 'chart.js';
 
 @Component({
   selector: 'app-data-page',
@@ -21,22 +12,22 @@ import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 })
 export class DataPageComponent implements OnInit {
 
-  data=[];
-  headers=[];
+  data = [];
+  headers = [];
 
-  query: string = 'SELECT * FROM base WHERE valor > 100 LIMIT 100';
+  // query: string = 'SELECT uuid,estado FROM base WHERE valor > 100 LIMIT 5';
+  query: string = 'SELECT valor FROM base LIMIT 100';
+
   connected = false;
   conSub: Subscription;
 
   data$: Observable<any>;
+  headers$: Observable<any>;
+  chart;
 
   constructor(private ds: DataService) {
-    this.conSub = this.ds.connection$
-      .pipe(
-        tap(con => {
-          $("#querybtn").attr('disabled', String(!con))
-        })
-      ).subscribe(con => this.connected = con);
+    this.conSub = this.ds.connection$.subscribe(con => this.connected = con);
+    this.headers$ = this.ds.headers$;
   }
 
   reload() {
@@ -59,26 +50,58 @@ export class DataPageComponent implements OnInit {
   }
   table = document.createElement('div');
 
+
+  transpose(a) {
+    return Object.keys(a[0]).map(function (c) {
+      return a.map(function (r) { return r[c]; });
+    });
+  }
+
   refresh(jdata) {
     //console.log(jdata[0]);
+    if (!jdata || !jdata.length || !(jdata.length > 1)) {
+      return;
+    }
     this.headers = []
     for (let k in jdata[0]) {
       this.headers.push(k);
     }
     console.log(this.headers);
     this.data = jdata.map(row => {
-      let newrow = this.headers.map(h => row[h]);
+      let newrow = this.headers.length === 1 ? row[this.headers[0]]: this.headers.map(h => row[h]);
       return newrow;
     });
-    new Tabulator(this.table, {
-      data: this.data,
-      reactiveData: true, //enable data reactivity
-      columns: this.headers,
-      layout: 'fitData',
-      height: '500px'
+    if (this.headers.length > 1) {
+      // this.data = this.transpose(this.data);
+    }
+    let datasets = [];
+    this.headers.forEach(h => {
+      let new_dataset = {
+        label: h,
+        data: [],
+        borderWidth: 1
+      }
+      datasets.push(new_dataset);
     });
+    for (let i = 0; i < datasets.length; i++) {
+      datasets[i].data = this.data.map(v => v.length?v[i]:v);
+      console.log(datasets[i].data);
+    }
+    let labels = this.data.map((_, i) => String(i));
+    console.log(JSON.parse(JSON.stringify(datasets)));
+    
+    this.chart = new Chart('datachart', {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: datasets,
+      },
+      options: {
+      }
+    });
+    // this.chart;
     console.log('drawing');
-    document.getElementById('tabulator').appendChild(this.table);
+    // t.redraw();
   }
 
   ngOnDestroy(): void {
@@ -86,6 +109,7 @@ export class DataPageComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }

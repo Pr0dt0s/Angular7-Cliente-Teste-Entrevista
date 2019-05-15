@@ -10,7 +10,7 @@ import { FooterComponent } from './layout_components/footer/footer.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SidebarComponent } from './layout_components/sidebar/sidebar.component';
 import { DataPageComponent } from './pages/data-page/data-page.component';
-import { TabulatorComponent } from './components/tabulator/tabulator.component';
+// import { TabulatorComponent } from './components/tabulator/tabulator.component';
 import { ClientConfigurationComponent } from './components/client-configuration/client-configuration.component';
 import { ServerConfigurationComponent } from './components/server-configuration/server-configuration.component'
 import { ConfigurationService } from './services/configuration.service';
@@ -25,7 +25,7 @@ import { ConfigurationPageComponent } from './pages/configuration-page/configura
     HomePageComponent,
     SidebarComponent,
     DataPageComponent,
-    TabulatorComponent,
+    // TabulatorComponent,
     ClientConfigurationComponent,
     ServerConfigurationComponent,
     ConfigurationPageComponent

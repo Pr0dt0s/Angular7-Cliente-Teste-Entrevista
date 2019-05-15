@@ -2,7 +2,7 @@
 
     <section class="hero">
         <div class="hero-body">
-            <div class="container">
+            <div class="">
                 <h1 class="title">
                     vista de dados
                 </h1>
@@ -20,15 +20,15 @@
                     <input class="input" type="text" placeholder="Select * from ..." [(ngModel)]="query" name="query">
                 </div>
             </div>
-            <div class="level">
-                <div class="level-left">
-                    <div class="level-item">
-                        <p></p>
+            <div class="columns">
+                <div class="column">
+                    <div class="">
+                        <strong>Campos disponiveis</strong>: {{headers$ | async }}
                     </div>
                 </div>
-                <div class="level-right">
-                    <div class="level-item">
-                        <button id="querybtn" class="button is-success" (click)="sendQuery()">Executar query!</button>
+                <div class="column is-2">
+                    <div class="">
+                        <button id="querybtn" class="button is-success" [class.disabled]="connected" (click)="sendQuery()">Executar query!</button>
                     </div>
                 </div>
             </div>
@@ -36,20 +36,18 @@
     </div>
 </div>
 
-<section class="section">
     <div class="notification">
         <div class="heading">
-            <h1 class="title">Table view</h1>
-            <div class="content">
-                <div id="tabulator"></div>
+            <h1 class="title">Plot</h1>
+            <div class="is-centered">
+                <canvas id="datachart" width="800px" height="400px"></canvas>
             </div>
         </div>
     </div>
-</section>
 <div *ngIf="data$ | async">
-    <div class="content">
-        <pre class="has-background-dark has-text-weight-bold has-text-white">
-            {{data$ | async | json}}
-        </pre>
+    <div class="box has-background-dark has-text-weight-bold has-text-white">
+        <div>
+            <p>{{data | json}}</p>
+        </div>
     </div>
 </div>

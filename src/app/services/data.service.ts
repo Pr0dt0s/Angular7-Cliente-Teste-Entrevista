@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { BehaviorSubject, timer, of, Observable, pipe, interval, OperatorFunction, Subscription, config } from 'rxjs';
@@ -11,7 +11,7 @@ import { ClientConfiguration, ServerConfiguration } from '../classes/classes';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService implements OnInit{
 
   // boolean to watch for connection established
   private connectionSubject = new BehaviorSubject<boolean>(false);
@@ -19,7 +19,7 @@ export class DataService {
 
   // api Details returned from request to serverUrl/api
   private apiDetailsSubject = new BehaviorSubject<Array<any>>([]);
-  private apiDetails$ = this.apiDetailsSubject.asObservable();
+  public apiDetails$ = this.apiDetailsSubject.asObservable();
 
   // Full table data from SELECT * FROM {tablename} (WARNING! should be presented paginated, may be too big handle in the DOM)
   private dataSubject = new BehaviorSubject<Array<any>>([]);
@@ -53,17 +53,20 @@ export class DataService {
       .pipe(
         this.http_retry(10, 1000),
     );
+    this.checkConnection();
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
   }
 
   queryConfig(newconfig?: ServerConfiguration): Observable<any> {
     console.log('GET config');
-    let method = newconfig ? this.http.post : this.http.get;
-
-    let obs = method(this.clientConfig.serverUrl + this.clientConfig.configUrl, { query: JSON.stringify(newconfig) }); 
     if (newconfig) {
-      return obs.pipe(tap(config => this.serverConfigSubject.next(config)));
+      return this.http.post(this.clientConfig.serverUrl + this.clientConfig.configUrl, { query: JSON.stringify(newconfig) }).pipe(tap(config => this.serverConfigSubject.next(config)));
     }
-    return obs;
+    return this.http.post(this.clientConfig.serverUrl + this.clientConfig.configUrl, { query: JSON.stringify(newconfig) });
   }
 
   dataQuery(query: string): Observable<any> {
@@ -82,12 +85,22 @@ export class DataService {
       });
   }
 
+  private headersSubject = new BehaviorSubject<any>([]);
+  public headers$ = this.headersSubject.asObservable();
+
+  queryHeaders() {
+    this.http.get(this.clientConfig.serverUrl + this.clientConfig.headersUrl).subscribe((h:Array<any>) => {
+      this.headersSubject.next(h.map(v => ' '+v['COLUMN_NAME']).join(','));
+    });
+  }
+
   checkConnection() {
     console.log('testing connection...');
     this.tryConnection$.subscribe(results => {
       this.connectionSubject.next(true);
       this.apiDetailsSubject.next(results);
       this.queryConfig().subscribe(sconfig => this.serverConfigSubject.next(sconfig));
+      this.queryHeaders();
     });
   }
 
