@@ -1,27 +1,9 @@
-# NodeJsClient
+##Teste de Javascript
+Para o funcionamento certo do Sistema é preciso ter o servidor Express correndo que será o intermediário entre o site de cliente e a base de dados e um servidor MySQL, pode configurar as conexões na aba de configurações.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+#Passos para correr:
+1.	Ter MySQL configurado preferivelmente com uma base de dados de proba “test_db”, mas se não tiver o servidor cria para você.
+2.	$ node ./src/app.js desde o projeto de servidor. 
+3.	Accessar o endpoint {express hostname:port}/api/seed_sql para iniciar a carga dos dados de a cordo com o arquivo de excel. Parâmetro “force=true” para recarregar os dados ainda se já tiver feio isto antes Ex: http://localhost:3000/api/seed_sql?force=true .
+4.	Correr a single page aplication que se comunica com o servidor com o comando ng serve desde este projeto.
