@@ -62,15 +62,19 @@ export class DataService implements OnInit{
   }
 
   queryConfig(newconfig?: ServerConfiguration): Observable<any> {
-    console.log('GET config');
+    // console.log('GET config');
     if (newconfig) {
-      return this.http.post(this.clientConfig.serverUrl + this.clientConfig.configUrl, { query: JSON.stringify(newconfig) }).pipe(tap(config => this.serverConfigSubject.next(config)));
+      return this.http.post(this.clientConfig.serverUrl + this.clientConfig.configUrl, { newconfig }).pipe(tap(config => this.serverConfigSubject.next(config)));
     }
-    return this.http.post(this.clientConfig.serverUrl + this.clientConfig.configUrl, { query: JSON.stringify(newconfig) });
+    return this.http.get(this.clientConfig.serverUrl + this.clientConfig.configUrl);
   }
 
   dataQuery(query: string): Observable<any> {
     return this.http.post(this.clientConfig.serverUrl + this.clientConfig.queryUrl, { query: query });
+  }
+
+  reseed() {
+    this.http.get(this.clientConfig.serverUrl + this.clientConfig.reseedUrl).subscribe();
   }
 
   loadAllData() {

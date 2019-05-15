@@ -92,6 +92,17 @@
               </label>
             </div>
           </div>
+          <div class="box has-background-warning">
+            <div class="title">Admin</div>
+            <div class="field">
+              <label class="label">force reseed?
+                <input type="checkbox" [(ngModel)]="force" name="omit_null">
+              </label>
+            </div>
+            <div class="field">
+              <button class="button is-danger" (click)="sendReseed()">Reseed</button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="level">

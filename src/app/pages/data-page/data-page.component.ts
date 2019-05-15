@@ -60,6 +60,7 @@ export class DataPageComponent implements OnInit {
   refresh(jdata) {
     //console.log(jdata[0]);
     if (!jdata || !jdata.length || !(jdata.length > 1)) {
+      jdata = { msg: "no data recieved" };
       return;
     }
     this.headers = []

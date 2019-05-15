@@ -18,9 +18,13 @@ export class ServerConfigurationComponent implements OnInit, OnDestroy {
   configModel: ServerConfiguration;
 
   configSubscription: Subscription;
-
+  force = false;
   constructor(private ds: DataService) {
 
+  }
+
+  sendReseed() {
+    this.ds.reseed();
   }
 
   sendConfig() {
@@ -29,12 +33,8 @@ export class ServerConfigurationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.configSubscription = this.ds.serverConfig$
-      .subscribe(config => {
-        this.configModel = { ...config };
-      });
     this.configModel = {
-      hostname: 'localhosta',
+      hostname: 'localhost',
       mysql_port: '3306',
       username: 'user_test',
       password: 'P@ssw0rd',
@@ -43,6 +43,11 @@ export class ServerConfigurationComponent implements OnInit, OnDestroy {
       replace_null: false,
       omit_null: false,
     }
+    this.configSubscription = this.ds.serverConfig$
+      .subscribe(config => {
+        this.configModel = { ...config };
+        console.log(config);
+      });
   }
 
   ngOnDestroy() {
