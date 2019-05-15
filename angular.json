@@ -48,7 +48,9 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": ["./node_modules/jquery/dist/jquery.min.js"],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

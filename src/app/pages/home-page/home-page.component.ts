@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -10,22 +10,25 @@ import { tap } from 'rxjs/operators';
 })
 export class HomePageComponent implements OnInit {
 
-  serverConnected$: Observable<boolean>;
-
-  data: any;
+  serverConnected: boolean = false;
+  data$: any;
+  con_subs: Subscription;
 
   constructor(private ds: DataService) { }
 
   ngOnInit() {
-    this.serverConnected$ = this.ds.conectionestablished$.pipe(tap(result => {
-      if (result) {
-        this.data = this.ds.ApiDetails();
-      }
-    }));
+    this.con_subs = this.ds.connection$.subscribe(v => this.serverConnected = v);
+    this.data$ = this.ds.apiDetails$;
   }
 
   retry() {
-    this.ds.check();
+    this.ds.checkConnection();
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.con_subs.unsubscribe();
   }
 
 }

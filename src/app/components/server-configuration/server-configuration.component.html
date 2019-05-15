@@ -1,0 +1,111 @@
+<div class="box has-background-info">
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Configuração do Servidor (Express app)
+        </h1>
+        <h2 class="subtitle">
+          Ajuste aqui os valores do Api.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <div>
+    <form class="form" #serverForm="ngForm">
+      <div class="columns">
+        <div class="column">
+          <div class="box">
+            <div class="title">MySQL</div>
+            <div class="AAA">
+              <div class="AAA-item">
+                <div class="field">
+                  <label class="label">Hostname</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.hostname"
+                      name="hostname">
+                  </div>
+                </div>
+              </div>
+              <div class="AAA-item">
+                <div class="field">
+                  <label class="label">Port</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.mysql_port"
+                      name="mysql_port">
+                  </div>
+                </div>
+              </div>
+              <div class="AAA-item">
+                <div class="field">
+                  <label class="label">Username</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.username"
+                      name="username">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="AAA">
+              <div class="AAA-item">
+                <div class="field">
+                  <label class="label">Password</label>
+                  <div class="control">
+                    <input class="input" type="password" placeholder="Text input" [(ngModel)]="configModel.password"
+                      name="password">
+                  </div>
+                </div>
+              </div>
+              <div class="AAA-item">
+                <div class="field">
+                  <label class="label">Database Name</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.database_name"
+                      name="database_name">
+                  </div>
+                </div>
+              </div>
+              <div class="AAA-item">
+                <div class="field">
+                  <label class="label">Table Name</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Text input" [(ngModel)]="configModel.table_name"
+                      name="table_name">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="title">Excel parser</div>
+            <div class="field">
+              <label class="label">Omit Null values
+                <input type="checkbox" [(ngModel)]="configModel.omit_null" name="omit_null">
+              </label>
+            </div>
+            <div class="field">
+              <label class="label">Replace Null values with 0
+                <input type="checkbox" [(ngModel)]="configModel.replace_null" name="replace_null">
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <!-- {{configModel | json}} -->
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+            <button class="button is-success" (click)="sendConfig()">Salvar Configuração</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

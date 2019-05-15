@@ -1,0 +1,53 @@
+<div class="box has-background-info">
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="">
+                <h1 class="title">
+                    vista de dados
+                </h1>
+                <h2 class="subtitle">
+                    enviar um query
+                </h2>
+            </div>
+        </div>
+    </section>
+    <div>
+        <form class="form" #queryForm="ngForm">
+            <div class="field">
+                <label class="label">Query</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Select * from ..." [(ngModel)]="query" name="query">
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    <div class="">
+                        <strong>Campos disponiveis</strong>: {{headers$ | async }}
+                    </div>
+                </div>
+                <div class="column is-2">
+                    <div class="">
+                        <button id="querybtn" class="button is-success" [class.disabled]="connected" (click)="sendQuery()">Executar query!</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <div class="notification">
+        <div class="heading">
+            <h1 class="title">Plot</h1>
+            <div class="is-centered">
+                <canvas id="datachart" width="800px" height="400px"></canvas>
+            </div>
+        </div>
+    </div>
+<div *ngIf="data$ | async">
+    <div class="box has-background-dark has-text-weight-bold has-text-white">
+        <div>
+            <p>{{data | json}}</p>
+        </div>
+    </div>
+</div>
