@@ -16,7 +16,9 @@ import { ServerConfigurationComponent } from './components/server-configuration/
 import { ConfigurationService } from './services/configuration.service';
 import { DataService } from './services/data.service';
 import { ConfigurationPageComponent } from './pages/configuration-page/configuration-page.component';
-
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NgSelectModule } from '@ng-select/ng-select'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,19 +30,23 @@ import { ConfigurationPageComponent } from './pages/configuration-page/configura
     // TabulatorComponent,
     ClientConfigurationComponent,
     ServerConfigurationComponent,
-    ConfigurationPageComponent
+    ConfigurationPageComponent,
+    DataTableComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   providers: [
     ConfigurationService,
     DataService
   ],
   bootstrap: [AppComponent],
+  entryComponents:[DataTableComponent]
 })
 export class AppModule { }

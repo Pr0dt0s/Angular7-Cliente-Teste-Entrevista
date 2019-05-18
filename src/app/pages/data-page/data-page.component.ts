@@ -48,7 +48,7 @@ export class DataPageComponent implements OnInit {
         })
       );
   }
-  table = document.createElement('div');
+  //table = document.createElement('div');
 
 
   transpose(a) {
