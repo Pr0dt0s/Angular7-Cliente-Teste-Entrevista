@@ -1,0 +1,25 @@
+.tablesContainer
+    display: grid;
+    box-sizing: border-box;
+    justify-items: stretch;
+    align-items: stretch;
+
+@media not screen and (max-width: 768px)
+    .small-grid
+        grid-auto-rows: 250px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+    .medium-grid
+        grid-auto-rows: 500px;
+        grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+
+    .large-grid
+        grid-auto-rows: 645px;
+        grid-template-columns: 1fr;
+
+@media screen and (max-width: 768px)
+    .tablesContainer
+
+    .small-grid,.medium-grid,.large-grid
+        grid-auto-rows: 250px;
+        grid-template-columns: 1fr;

@@ -22,6 +22,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   @Input() options: Chart.ChartOptions;
   @Input() type: Chart.ChartType;
 
+  @Input() darkbg: boolean = false;
+
   chart: Chart;
   subs: Subscription = new Subscription();
   context: CanvasRenderingContext2D;
@@ -60,6 +62,5 @@ export class DataTableComponent implements OnInit, AfterViewInit {
         options: this.options,
       });
     })
-    console.log(this.chart);
   }
 }

@@ -1,33 +1,27 @@
-<div id="dashboard">
-<div class="">
-  <div class=""> 
-    <template #table1></template>
-  </div>
-  <div class="">
-    <template #table2></template>
-  </div>
-  <div class="">
-    <template #table3></template>
-  </div>
-  <div class="">
-    <template #table4></template>
-  </div>
-  <div class="">
-    <template #table5></template>
-  </div>
-  <div class="">
-    <template #table6></template>
-  </div>
-  <div class="">
-    <template #table7></template>
-  </div>
-  <div class="">
-    <template #table8></template>
-  </div>
-  <div class="">
-    <template #table9></template>
+<div class="field is-grouped is-grouped-centered">
+  <p class="control">
+    <a class="button is-info" (click)="changeSize('small-grid')">
+      Small
+    </a>
+  </p>
+  <p class="control">
+    <a class="button is-success" (click)="changeSize('medium-grid')">
+      Medium
+    </a>
+  </p>
+  <p class="control">
+    <a class="button is-danger" (click)="changeSize('large-grid')">
+      Large
+    </a>
+  </p>
+  <div class="field">
+    <a [ngClass]="{'button':true, 'is-light':colorText === 'Light Theme' , 'is-dark':colorText !== 'Light Theme'}"
+      (click)="toogleTheme()">
+      {{ colorText }}
+    </a>
   </div>
 </div>
-  
-  
+
+<div id="dashboard" class="tablesContainer" [ngClass]="class">
+  <ng-template #tablesContainer></ng-template>
 </div>

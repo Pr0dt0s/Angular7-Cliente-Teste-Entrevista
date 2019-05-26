@@ -1,22 +1,14 @@
-<section class="hero is-fullheight">
-    <div class="hero-head">
+<div class="app-container">
+    <div class="header-container ">
         <app-header></app-header>
     </div>
-    <div class="hero-bodya">
-
-        <div class="columns ">
-            <div id="sidebar-container" class="column is-narrow">
-                <app-sidebar></app-sidebar>
-            </div>
-
-            <div class="column">
-                <section class="section">
-                    <router-outlet></router-outlet>
-                </section>
-            </div>
-        </div>
+    <div class="sidebar-container has-background-grey-dark">
+        <app-sidebar></app-sidebar>
     </div>
-    <div class="hero-foot">
+    <div class="main-container">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="footer-container has-background-grey-light">
         <app-footer></app-footer>
     </div>
-</section>
+</div>
